@@ -2,11 +2,11 @@
 - hosts: all
   become: yes
   tasks:
-  - name: Update the package nginx
+  - name: Update the package twingate
     package:
       name: twingate
       state: latest
-  - name: Restart the nginx service
+  - name: Restart the twingate service
     service:
       name: twingate
       state: restarted
