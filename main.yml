@@ -31,7 +31,10 @@
     changed_when: false
     when: ansible_distribution == "RedHat"
 
-
+- hosts: all
+  become: yes
+  serial: 1
+  tasks:
 
   - name: Update the package twingate connector
     package:
