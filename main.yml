@@ -2,11 +2,45 @@
 - hosts: all
   become: yes
   tasks:
-  - name: Update the package twingate
+
+  - name: Update Package Cache (apt/Ubuntu)
+    tags: always
+    apt:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Update Package Cache (dnf/CentOS)
+    tags: always
+    dnf:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+
+  - name: Update Package Cache (yum/Amazon)
+    tags: always
+    yum:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "Amazon"
+
+  - name: Update Package Cache (yum/RedHat)
+    tags: always
+    yum:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "RedHat"
+
+
+
+  - name: Update the package twingate connector
     package:
-      name: twingate
+      name: twingate-connector
       state: latest
-  - name: Restart the twingate service
+    register: updated
+
+  - name: Restart the twingate service connector
     service:
-      name: twingate
+      name: twingate-connector
       state: restarted
+    when: updated.changed
