@@ -1,0 +1,11 @@
+[proxy]
+169
+
+[nodes]
+#10.177.56.78
+10.177.56.99
+10.177.56.101
+
+[nodes:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -i ../key.pem -p 22 -W %h:%p -q root@169"'
+ansible_user=root
