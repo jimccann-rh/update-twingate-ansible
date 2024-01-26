@@ -59,6 +59,5 @@
     service:
       name: chronyd
       state: restarted
-    when: updated2.changed
 
 
