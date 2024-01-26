@@ -57,7 +57,7 @@
 
   - name: Restart the chrony service 
     service:
-      name: chrony
+      name: chronyd
       state: restarted
     when: updated2.changed
 
