@@ -47,3 +47,18 @@
       name: twingate-connector
       state: restarted
     when: updated.changed
+
+  - name: make sure chronyd is installed
+    package:
+      name: chrony
+      state: latest
+      update_cache: yes
+    register: updated2
+
+  - name: Restart the chrony service 
+    service:
+      name: chrony
+      state: restarted
+    when: updated2.changed
+
+
